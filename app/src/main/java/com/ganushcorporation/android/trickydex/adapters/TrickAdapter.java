@@ -28,6 +28,8 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
     private String type;
     private TextView info;
     public ImageView buttonCloseInfo;
+
+
     public TrickAdapter(Context context, ArrayList<Trick> list, String typePass) {
         this.context = context;
         this.list = list;
