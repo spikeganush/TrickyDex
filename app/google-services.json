@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "333186084335",
+    "project_id": "ait-course-review",
+    "storage_bucket": "ait-course-review.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333186084335:android:3daab84b7ad0fb5c531a1a",
+        "android_client_info": {
+          "package_name": "com.ganushcorporation.android.trickydex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333186084335-mp86ngscmooenvkhs3b3l7g1f5k2n806.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZa7DlIbYzstZVYzsFsLFCY3T77z0XenQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333186084335-mp86ngscmooenvkhs3b3l7g1f5k2n806.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

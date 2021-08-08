@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable-v24/button_login_round_corner.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable-v24/button_round.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable-v24/text_input_round_corner.xml" value="0.3723076923076923" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/add.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/air_bg.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/bg_dialog.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/bg_info.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/first_name.xml" value="0.21875" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/grab_bg.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/image_slide.xml" value="0.32685185185185184" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/information.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/progress_bg.xml" value="0.2962962962962963" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/right_card.xml" value="0.3723076923076923" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/right_card_air.xml" value="0.3723076923076923" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/right_card_grab.xml" value="0.3723076923076923" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/right_card_list.xml" value="0.3723076923076923" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/right_card_slide.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/star.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/trick_list_bg.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/trick_list_right_part.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/drawable/user_empty.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_add_trick.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_admin.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_forgot_password.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_login.xml" value="0.67" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_manage_trick.xml" value="0.33" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_menu.xml" value="0.5" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_profile.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_test.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_trick_list.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/activity_user_list.xml" value="0.33" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/add_trick.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/content_test.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/fragment_first.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/info_popup.xml" value="0.3625" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/trick.xml" value="0.33" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/trick_list.xml" value="0.5" />
+        <entry key="..\:/Users/spiko/StudioProjects/TrickyDex/app/src/main/res/layout/update_trick.xml" value="0.3625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ProfileActivity">
+
+    <ImageView
+        android:id="@+id/backButtonAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="?attr/greyLogo"
+        android:contentDescription="@string/back_button"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <ImageView
+        android:id="@+id/imageViewProfile2"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/user_pic"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight4"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:srcCompat="@drawable/user_empty" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/trickydex"
+        android:textColor="@color/blue_title"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/backButtonAccount"
+        app:layout_constraintStart_toEndOf="@+id/backButtonAccount"
+        app:layout_constraintTop_toTopOf="@+id/backButtonAccount" />
+
+    <TextView
+        android:id="@+id/textViewAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:text="@string/account"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight4"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft4"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textViewAccountFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/first_name"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccount" />
+
+    <TextView
+        android:id="@+id/textViewAccountLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/last_name"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAccountFirstName"
+        app:layout_constraintStart_toEndOf="@+id/textViewAccountFirstName"
+        app:layout_constraintTop_toTopOf="@+id/textViewAccountFirstName" />
+
+    <TextView
+        android:id="@+id/textViewAccountEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/email_address"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccountFirstName" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:backgroundTint="@color/button_register"
+        android:text="@string/logout"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight4"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccountEmail" />
+</androidx.constraintlayout.widget.ConstraintLayout>

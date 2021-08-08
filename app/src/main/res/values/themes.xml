@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="Theme.TrickyDex.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TrickyDex.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.TrickyDex.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>
