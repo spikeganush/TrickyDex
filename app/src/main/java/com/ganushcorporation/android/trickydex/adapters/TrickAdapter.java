@@ -26,7 +26,7 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
     private ArrayList<Trick> list;
     private Trick trick;
     private String type;
-    private TextView info;
+    private TextView info, infoTrickName;
     public ImageView buttonCloseInfo;
 
 
@@ -47,12 +47,16 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
     @Override
     public void onBindViewHolder(@NonNull TrickListViewHolder holder, int position) {
         trick = list.get(position);
-
         holder.trickName.setText(trick.name);
+        holder.infoTrick = trick.info;
         holder.infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showInfo();
+                info.setText(holder.infoTrick);
+                infoTrickName.setText(holder.trickName.getText() + " info:");
+
+
 
             }
         });
@@ -88,6 +92,7 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
 
         // textView
         info = dialogUpdate.findViewById(R.id.textViewInfo);
+        infoTrickName = dialogUpdate.findViewById(R.id.textViewInfoName);
 
 
     }
@@ -102,6 +107,7 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
         CardView cardTrick;
         ImageView infoButton;
         ConstraintLayout cardTrickRight;
+        String infoTrick;
 
 
         public TrickListViewHolder(@NonNull View itemView) {
@@ -110,6 +116,9 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
             infoButton = itemView.findViewById(R.id.imageViewInfo);
             cardTrick = itemView.findViewById(R.id.cardViewTrickUser);
             cardTrickRight = itemView.findViewById(R.id.ConstraintLayoutTrickListRight);
+            infoTrick = "";
+
+
 
 
         }

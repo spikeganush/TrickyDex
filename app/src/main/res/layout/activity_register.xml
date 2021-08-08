@@ -1,193 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:backgroundTintMode="add"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/textConnect2"
-        android:layout_width="262dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="@string/create_account"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/backButton"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="@+id/backButton" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTitle"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        android:layout_marginBottom="24dp"
+        android:background="@color/white"
+        android:backgroundTintMode="add">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.15" />
+        <TextView
+            android:id="@+id/textConnect2"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/create_account"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/backButton"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintTop_toTopOf="@+id/backButton" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.85" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
 
-    <Button
-        android:id="@+id/buttonRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:backgroundTint="@color/button_register"
-        android:elevation="3dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="@string/register"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
 
-    <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="?attr/greyLogo"
-        android:contentDescription="@string/back_button"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
 
-    <EditText
-        android:id="@+id/editTextEmailRegister"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="?attr/greyLogo"
-        android:drawableEnd="@drawable/email"
-        android:ems="10"
-        android:hint="@string/e_mail_address"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:singleLine="true"
-        android:textColor="?attr/greyLogo"
-        android:textColorHighlight="@color/blue_title"
-        android:textColorHint="?attr/greyLogo"
-        android:textColorLink="@color/blue_title"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="128dp"
+            android:backgroundTint="@color/button_register"
+            android:elevation="3dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/register"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword" />
 
-    <EditText
-        android:id="@+id/editTextFirstName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="?attr/greyLogo"
-        android:drawableEnd="@drawable/first_name"
-        android:ems="10"
-        android:hint="@string/first_name"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:textColor="?attr/greyLogo"
-        android:textColorHighlight="@android:color/transparent"
-        android:textColorHint="?attr/greyLogo"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailRegister" />
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="?attr/greyLogo"
+            android:contentDescription="@string/back_button"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="?attr/actionModeCloseDrawable" />
 
-    <EditText
-        android:id="@+id/editTextFirstLastName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="?attr/greyLogo"
-        android:drawableEnd="@drawable/last_name"
-        android:ems="10"
-        android:hint="@string/last_name"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:textColor="?attr/greyLogo"
-        android:textColorHighlight="@android:color/transparent"
-        android:textColorHint="?attr/greyLogo"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
+        <EditText
+            android:id="@+id/editTextEmailRegister"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/greyLogo"
+            android:drawableEnd="@drawable/email"
+            android:ems="10"
+            android:hint="@string/e_mail_address"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="?attr/greyLogo"
+            android:textColorHighlight="@color/blue_title"
+            android:textColorHint="?attr/greyLogo"
+            android:textColorLink="@color/blue_title"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
+            app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
 
-    <EditText
-        android:id="@+id/editTextPasswordRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="?attr/greyLogo"
-        android:drawableEnd="@drawable/password"
-        android:ems="10"
-        android:hint="@string/password"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:textColor="?attr/greyLogo"
-        android:textColorHighlight="@android:color/transparent"
-        android:textColorHint="?attr/greyLogo"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFirstLastName" />
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="?attr/greyLogo"
+            android:drawableEnd="@drawable/first_name"
+            android:ems="10"
+            android:hint="@string/first_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textColor="?attr/greyLogo"
+            android:textColorHighlight="@android:color/transparent"
+            android:textColorHint="?attr/greyLogo"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmailRegister" />
 
-    <EditText
-        android:id="@+id/editTextConfirmPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="?attr/greyLogo"
-        android:drawableEnd="@drawable/confirm_password"
-        android:ems="10"
-        android:hint="@string/confirm_password"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:textColor="?attr/greyLogo"
-        android:textColorHighlight="@android:color/transparent"
-        android:textColorHint="?attr/greyLogo"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordRegister" />
+        <EditText
+            android:id="@+id/editTextFirstLastName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="?attr/greyLogo"
+            android:drawableEnd="@drawable/last_name"
+            android:ems="10"
+            android:hint="@string/last_name"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textColor="?attr/greyLogo"
+            android:textColorHighlight="@android:color/transparent"
+            android:textColorHint="?attr/greyLogo"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
+            app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
 
-    <ProgressBar
-        android:id="@+id/progressBarRegister"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/editTextPasswordRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="?attr/greyLogo"
+            android:drawableEnd="@drawable/password"
+            android:ems="10"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="?attr/greyLogo"
+            android:textColorHighlight="@android:color/transparent"
+            android:textColorHint="?attr/greyLogo"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
+            app:layout_constraintTop_toBottomOf="@+id/editTextFirstLastName" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/editTextConfirmPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="?attr/greyLogo"
+            android:drawableEnd="@drawable/confirm_password"
+            android:ems="10"
+            android:hint="@string/confirm_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="?attr/greyLogo"
+            android:textColorHighlight="@android:color/transparent"
+            android:textColorHint="?attr/greyLogo"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPasswordRegister" />
+
+        <ProgressBar
+            android:id="@+id/progressBarRegister"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guidelineTitle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

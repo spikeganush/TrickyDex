@@ -59,23 +59,28 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
     public void onBindViewHolder(@NonNull TrickViewHolder holder, int position) {
         trick = list.get(position);
         holder.trickName.setText(trick.name);
+
+        holder.trickInfo = trick.info;
+        holder.trickDifficulty = trick.difficulty;
+        holder.trickCategory = trick.category;
+
         holder.cardTrick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopUpUpdate();
-                editTextNameUpdate.setText(trick.name);
-                editTextInfoUpdate.setText(trick.info);
+                editTextNameUpdate.setText(holder.trickName.getText());
+                editTextInfoUpdate.setText(holder.trickInfo);
                 int position;
 
-                if(trick.category.equals("Slide")) {
+                if(holder.trickCategory.equals("Slide")) {
                     position = 0;
-                } else if (trick.category.equals("Grab")) {
+                } else if (holder.trickCategory.equals("Grab")) {
                     position = 1;
                 } else {
                     position = 2;
                 }
                 categorySpinnerUpdate.setSelection(position);
-                seekBarDifficultyUpdate.setProgress(trick.difficulty);
+                seekBarDifficultyUpdate.setProgress(holder.trickDifficulty);
             }
         });
 
@@ -161,21 +166,17 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
     public static class TrickViewHolder extends RecyclerView.ViewHolder {
                 TextView trickName;
                 CardView cardTrick;
-
-                EditText trickNameUpdate, trickInfoUpdate;
-                Spinner categoryUpdate;
-                SeekBar difficultyUpdate;
+                int trickDifficulty;
+                String trickCategory, trickInfo;
 
 
         public TrickViewHolder(@NonNull View itemView) {
             super(itemView);
             trickName = itemView.findViewById(R.id.textViewTrickName);
+            trickInfo = "";
             cardTrick = itemView.findViewById(R.id.cardViewTrickAdmin);
-
-            trickNameUpdate = itemView.findViewById(R.id.editTextTrickNameUpdate);
-            trickInfoUpdate = itemView.findViewById(R.id.editTextInfoUpdate);
-            categoryUpdate = itemView.findViewById(R.id.spinnerCategoryUpdate);
-            difficultyUpdate = itemView.findViewById(R.id.seekBarDifficultyUpdate);
+            trickDifficulty = 0;
+            trickCategory = "";
 
         }
     }
