@@ -17,4 +17,5 @@
     <color name="air_bg_color">#9F67FA</color>
     <color name="grab_bg_color">#67A2FA</color>
     <color name="list_bg_color">#67FAA2</color>
+    <color name="ic_launcher_background">#ea292a</color>
 </resources>
