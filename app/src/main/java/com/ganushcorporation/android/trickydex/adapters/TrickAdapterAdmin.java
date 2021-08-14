@@ -3,6 +3,7 @@ package com.ganushcorporation.android.trickydex.adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +27,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.TrickViewHolder>  {
 
     public Context context;
     public ArrayList<Trick> list;
+    private ArrayList<String> trickId;
     public EditText  editTextNameUpdate, editTextInfoUpdate;
     public SeekBar seekBarDifficultyUpdate;
     public ProgressBar progressBarUpdate;
@@ -38,20 +42,26 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
     public Button buttonValidateTrickUpdate;
     public DatabaseReference referenceUpdate;
     public Spinner categorySpinnerUpdate;
-    public String categoryToPushUpdate;
+    public String categoryToPushUpdate, idTrickTest;
     public Trick trick;
 
+    private DatabaseReference reference;
 
-    public TrickAdapterAdmin(Context context, ArrayList<Trick> list) {
+
+    public TrickAdapterAdmin(Context context, ArrayList<Trick> list, ArrayList<String> trickId) {
         this.context = context;
         this.list = list;
+        this.trickId = trickId;
     }
 
     @NonNull
     @Override
     public TrickViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.trick, parent,false);
+        reference = FirebaseDatabase.getInstance().getReference("Tricks");
         return new TrickViewHolder(v);
+
+
 
     }
 
@@ -63,11 +73,15 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
         holder.trickInfo = trick.info;
         holder.trickDifficulty = trick.difficulty;
         holder.trickCategory = trick.category;
+        holder.idTrick = trickId.get(position);
+
 
         holder.cardTrick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopUpUpdate();
+                idTrickTest = holder.idTrick;
+                Log.e("onBindViewHolder: ", idTrickTest);
                 editTextNameUpdate.setText(holder.trickName.getText());
                 editTextInfoUpdate.setText(holder.trickInfo);
                 int position;
@@ -82,6 +96,8 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
                 categorySpinnerUpdate.setSelection(position);
                 seekBarDifficultyUpdate.setProgress(holder.trickDifficulty);
             }
+
+
         });
 
         if(trick.category.equals("Slide")){
@@ -96,6 +112,10 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
             holder.cardTrick.setCardBackgroundColor(Color.parseColor("#67FAA2"));
             return;
         }
+
+
+
+
 
     }
 
@@ -118,9 +138,31 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
         buttonCloseUpdate = dialogUpdate.findViewById(R.id.imageViewCloseBtnUpdate);
         buttonCloseUpdate.setOnClickListener(view -> dialogUpdate.dismiss());
 
+
         // Clickable
         buttonValidateTrickUpdate = dialogUpdate.findViewById(R.id.buttonUpdateTrick);
-        buttonValidateTrickUpdate.setOnClickListener(view -> updateTrick());
+        buttonValidateTrickUpdate.setOnClickListener(view -> {
+                    /////////////////////////////////////////
+                    //--------------UPDATE TRICK-----------//
+                    /////////////////////////////////////////
+
+                    Map<String, Object> childUpdates = new HashMap<>();
+                    String newName = editTextNameUpdate.getText().toString();
+                    String newInfo = editTextInfoUpdate.getText().toString();
+                    String category = categoryToPushUpdate;
+                    int difficulty = seekBarDifficultyUpdate.getProgress();
+
+                    childUpdates.put(idTrickTest +"/name", newName);
+                    childUpdates.put(idTrickTest +"/info", newInfo);
+                    childUpdates.put(idTrickTest +"/category", category);
+                    childUpdates.put(idTrickTest +"/difficulty", difficulty);
+                    Log.e( "onBindViewHolder: ", idTrickTest);
+                    referenceUpdate.updateChildren(childUpdates);
+                    dialogUpdate.dismiss();
+                }
+        );
+
+
 
         // Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -154,9 +196,6 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
 
     }
 
-    public void updateTrick() {
-
-    }
 
     @Override
     public int getItemCount() {
@@ -167,7 +206,7 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
                 TextView trickName;
                 CardView cardTrick;
                 int trickDifficulty;
-                String trickCategory, trickInfo;
+                String trickCategory, trickInfo, idTrick;
 
 
         public TrickViewHolder(@NonNull View itemView) {
@@ -177,6 +216,7 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
             cardTrick = itemView.findViewById(R.id.cardViewTrickAdmin);
             trickDifficulty = 0;
             trickCategory = "";
+            idTrick= "";
 
         }
     }

@@ -37,6 +37,7 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
     private ProgressBar progressBar;
     private String categoryToPush;
     private ImageView buttonClose;
+    public ArrayList<String> listTrickId;
 
     private EditText  editTextNameUpdate, editTextInfoUpdate;
     private SeekBar seekBarDifficultyUpdate;
@@ -73,8 +74,10 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
+        listTrickId = new ArrayList<>();
         list = new ArrayList<>();
-        trickAdapterAdmin = new TrickAdapterAdmin(this, list);
+        trickAdapterAdmin = new TrickAdapterAdmin(this, list, listTrickId);
         recyclerView.setAdapter(trickAdapterAdmin);
 
         databaseReference.orderByChild("category").addValueEventListener(new ValueEventListener() {
@@ -82,6 +85,7 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Trick trick = dataSnapshot.getValue(Trick.class);
+                    listTrickId.add(dataSnapshot.getKey());
                     list.add(trick);
                 }
                 trickAdapterAdmin.notifyDataSetChanged();
@@ -133,6 +137,7 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
         buttonValidateTrick = dialog.findViewById(R.id.buttonValidateTrick);
         buttonValidateTrick.setOnClickListener(view -> addTrick());
 
+
         // Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         reference = database.getReference("Tricks");
@@ -164,8 +169,6 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
         });
 
     }
-
-
 
     private void addTrick() {
         String name = editTextName.getText().toString();

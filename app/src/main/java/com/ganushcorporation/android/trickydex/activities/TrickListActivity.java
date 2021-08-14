@@ -34,6 +34,7 @@ public class TrickListActivity extends AppCompatActivity implements View.OnClick
     public DatabaseReference databaseReference;
     public TrickAdapter trickAdapter;
     public ArrayList<Trick> listTrick;
+    public ArrayList<String> listTrickId;
     private String type;
     private TextView welcome;
 
@@ -54,8 +55,9 @@ public class TrickListActivity extends AppCompatActivity implements View.OnClick
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        listTrickId = new ArrayList<>();
         listTrick = new ArrayList<>();
-        trickAdapter = new TrickAdapter(this, listTrick, type);
+        trickAdapter = new TrickAdapter(this, listTrick, type, listTrickId);
         recyclerView.setAdapter(trickAdapter);
 
         databaseReference.orderByChild("category").equalTo(type).addValueEventListener(new ValueEventListener() {
@@ -63,6 +65,7 @@ public class TrickListActivity extends AppCompatActivity implements View.OnClick
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Trick trick = dataSnapshot.getValue(Trick.class);
+                    listTrickId.add(dataSnapshot.getKey());
                     listTrick.add(trick);
                 }
                 trickAdapter.notifyDataSetChanged();

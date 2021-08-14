@@ -20,8 +20,7 @@
         android:id="@+id/buttonUpdateTrick"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="48dp"
         android:backgroundTint="@color/button_register"
         android:elevation="3dp"
         android:fontFamily="@font/roboto_medium"
@@ -29,10 +28,25 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight12"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft12"
         app:layout_constraintTop_toBottomOf="@+id/seekBarDifficultyUpdate" />
+
+    <Button
+        android:id="@+id/buttonDeleteTrick"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/button_delete"
+        android:elevation="3dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/delete_trick"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight12"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft12"
+        app:layout_constraintTop_toBottomOf="@+id/buttonUpdateTrick" />
 
     <EditText
         android:id="@+id/editTextTrickNameUpdate"
