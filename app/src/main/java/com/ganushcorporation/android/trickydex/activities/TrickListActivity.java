@@ -29,7 +29,7 @@ public class TrickListActivity extends AppCompatActivity implements View.OnClick
     // Firebase
     private DatabaseReference reference;
 
-    private ImageView buttonBack;
+    private ImageView buttonBack, profile;
 
     public RecyclerView recyclerView;
     public DatabaseReference databaseReference;
@@ -50,6 +50,9 @@ public class TrickListActivity extends AppCompatActivity implements View.OnClick
 
         buttonBack = findViewById(R.id.backButtonTrickList);
         buttonBack.setOnClickListener(this);
+
+        profile = findViewById(R.id.imageViewProfileTrickList);
+        profile.setOnClickListener(this);
 
         recyclerView = findViewById(R.id.trickListUser);
         databaseReference = FirebaseDatabase.getInstance().getReference("Tricks");
@@ -85,6 +88,10 @@ public class TrickListActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.backButtonTrickList:
                 finish();
+                break;
+            case R.id.imageViewProfileTrickList:
+                Intent intent = new Intent(TrickListActivity.this, ProfileActivity.class);
+                startActivity(intent);
                 break;
         }
 

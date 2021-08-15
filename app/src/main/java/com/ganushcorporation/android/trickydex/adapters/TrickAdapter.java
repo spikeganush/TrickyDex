@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.protobuf.Value;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,10 +49,13 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
     public User userProfile, userListTrickChecked;
     // Firebase
     private FirebaseUser user;
-    private DatabaseReference reference;
+    private DatabaseReference reference, referenceTrick;
     private String userID;
-    private Map<String, Object> childUpdates;
+    private Map<String, Object> childUpdates, childUpdatesIncrement;
 
+    public ArrayList<Trick> listTrick;
+    public ArrayList<String> listTrickId;
+    public int count = 0;
 
     public TrickAdapter(Context context, ArrayList<Trick> list, String typePass, ArrayList<String> trickId) {
         this.context = context;
@@ -65,12 +69,7 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
     @Override
     public TrickListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.trick_list, parent,false);
-
-
         return new TrickListViewHolder(v);
-
-
-
     }
 
     @Override
@@ -84,10 +83,31 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
         // Firebase
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
-
-
-
         reference = FirebaseDatabase.getInstance().getReference("Users");
+        referenceTrick = FirebaseDatabase.getInstance().getReference("Tricks");
+
+
+        listTrickId = new ArrayList<>();
+        listTrick = new ArrayList<>();
+        childUpdatesIncrement = new HashMap<>();
+
+
+        referenceTrick.orderByChild("category").equalTo(type).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    Trick trick = dataSnapshot.getValue(Trick.class);
+                    listTrickId.add(dataSnapshot.getKey());
+                    listTrick.add(trick);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //in some cases, it will prevent unwanted situations
         holder.trickDone.setOnCheckedChangeListener(null);
@@ -100,12 +120,6 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //set your object's last status
                 holder.trickDone.setSelected(isChecked);
-                childUpdates = new HashMap<>();
-                childUpdates.put(userID+ "/"+type+"/", 0);
-
-                reference = FirebaseDatabase.getInstance().getReference("Users");
-
-                reference.updateChildren(childUpdates);
             }
         });
 
@@ -129,6 +143,20 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
             }
         });
 
+        holder.trickDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.trickDone.isChecked()) {
+                    childUpdatesIncrement.put(userID+ "/"+type+"/", ServerValue.increment(1));
+
+                } else {
+                    childUpdatesIncrement.put(userID+ "/"+type+"/", ServerValue.increment(-1));
+
+                }
+                reference.updateChildren(childUpdatesIncrement);
+            }
+        });
+
 
         holder.trickDone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -149,22 +177,20 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
                     }
                 });
 
+
                 if(holder.trickDone.isChecked()) {
                     try {
+                        count++;
+                        Log.e("Count check: ", String.valueOf(count));
                         childUpdates.put(userID+ "/listDone/" + holder.idTrick, holder.idTrick);
-                        childUpdates.put(userID+ "/"+type+"/", ServerValue.increment(1));
+
 
                     } catch(Exception e) {
 
                     }
-
-
-
-
                 } else {
-                    childUpdates.put(userID+ "/"+type+"/", ServerValue.increment(-1));
+//                    childUpdates.put(userID+ "/"+type+"/", ServerValue.increment(-1));
                     reference.child(userID+ "/listDone/" + holder.idTrick).removeValue();
-
                 }
                 reference.updateChildren(childUpdates);
             }

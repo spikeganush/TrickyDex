@@ -33,7 +33,7 @@
                     tools:ignore="RedundantDescriptionCheck" />
 
                 <ImageView
-                    android:id="@+id/imageViewProfile4"
+                    android:id="@+id/imageViewProfileTrickList"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:contentDescription="@string/user_pic"

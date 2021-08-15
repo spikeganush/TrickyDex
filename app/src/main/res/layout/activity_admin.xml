@@ -19,7 +19,7 @@
         tools:ignore="RedundantDescriptionCheck" />
 
     <ImageView
-        android:id="@+id/imageViewProfile3"
+        android:id="@+id/imageViewProfileAdmin"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:contentDescription="@string/user_pic"

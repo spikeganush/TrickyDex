@@ -388,7 +388,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/list_bg_color"
-                    android:minHeight="130dp">
+                    android:minHeight="130dp"
+                    android:visibility="gone">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayoutListCardRight"

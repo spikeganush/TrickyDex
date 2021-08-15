@@ -20,14 +20,6 @@ public class Trick {
         this.admin = "yes";
 
     }
-    public Trick(String id, String name, String category, String info, int difficulty){
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.info = info;
-        this.difficulty = difficulty;
-
-    }
 
     public boolean isSelected() {
         return isSelected;

@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
-    private ImageView backButton;
+    private ImageView backButton, profile;
     private TextView welcome;
     private Button addTrick;
     // Firebase
@@ -39,6 +39,9 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         // Clickable
         backButton = findViewById(R.id.backButtonAdmin);
         backButton.setOnClickListener(this);
+
+        profile = findViewById(R.id.imageViewProfileAdmin);
+        profile.setOnClickListener(this);
 
         addTrick = findViewById(R.id.buttonAddTrick);
         addTrick.setOnClickListener(this);
@@ -81,6 +84,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             case R.id.buttonAddTrick:
                 startActivity(new Intent(AdminActivity.this, ManageTrickActivity.class));
                 break;
+            case R.id.imageViewProfileAdmin:
+                startActivity(new Intent(AdminActivity.this, ProfileActivity.class));
+                break;
+
         }
 
     }

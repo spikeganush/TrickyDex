@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,9 +27,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class  ManageTrickActivity extends AppCompatActivity implements View.OnClickListener {
     private Spinner categorySpinner;
@@ -35,15 +40,14 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
     private EditText editTextName, editTextInfo;
     private Button buttonValidateTrick, buttonAdd;
     private ProgressBar progressBar;
-    private String categoryToPush;
-    private ImageView buttonClose;
+    private String categoryToPush, type;
+    private ImageView buttonClose, buttonBack, profile;
 
 
     // Firebase
     private DatabaseReference reference;
-
-    private ImageView buttonBack;
-
+    /////////////////////////////////
+    Map<String, Object> childUpdates;
     public RecyclerView recyclerView;
     public DatabaseReference databaseReference;
     public TrickAdapterAdmin trickAdapterAdmin;
@@ -63,6 +67,9 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
         buttonBack = findViewById(R.id.backButtonAdmin2);
         buttonBack.setOnClickListener(this);
 
+        profile = findViewById(R.id.imageViewProfileTrickListAdmin);
+        profile.setOnClickListener(this);
+
         recyclerView = findViewById(R.id.trickList);
         databaseReference = FirebaseDatabase.getInstance().getReference("Tricks");
         recyclerView.setHasFixedSize(true);
@@ -71,20 +78,21 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
 
         listTrickId = new ArrayList<>();
         list = new ArrayList<>();
-        trickAdapterAdmin = new TrickAdapterAdmin(this, list, listTrickId);
+        trickAdapterAdmin = new TrickAdapterAdmin(this, list, type, listTrickId);
         recyclerView.setAdapter(trickAdapterAdmin);
 
 
         databaseReference.orderByChild("admin").equalTo("yes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Trick trick = dataSnapshot.getValue(Trick.class);
+                    type = trick.category;
                     listTrickId.add(dataSnapshot.getKey());
                     list.add(trick);
                 }
                 trickAdapterAdmin.notifyDataSetChanged();
-
             }
 
             @Override
@@ -102,6 +110,9 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.backButtonAdmin2:
                 finish();
+                break;
+            case R.id.imageViewProfileTrickListAdmin:
+                startActivity(new Intent(ManageTrickActivity.this, ProfileActivity.class));
                 break;
         }
         
@@ -173,6 +184,9 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
         reference.push().setValue(trick).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
                 progressBar.setVisibility(View.GONE);
+                childUpdates = new HashMap<>();
+                childUpdates.put(category, ServerValue.increment(1));
+                reference.updateChildren(childUpdates);
                 dialog.dismiss();
                 Toast.makeText(ManageTrickActivity.this,name+" has been registered successfully!", Toast.LENGTH_LONG).show();
             } else {
@@ -182,12 +196,4 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
         });
 
     }
-
-
-
-    public void updateTrick() {
-
-    }
-
-
 }

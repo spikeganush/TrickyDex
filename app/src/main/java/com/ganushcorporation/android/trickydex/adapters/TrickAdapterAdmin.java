@@ -42,16 +42,17 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
     public Button buttonValidateTrickUpdate, buttonDelete;
     public DatabaseReference referenceUpdate;
     public Spinner categorySpinnerUpdate;
-    public String categoryToPushUpdate, idTrickTest;
+    public String categoryToPushUpdate, idTrickTest, type;
     public Trick trick;
 
     private DatabaseReference reference;
 
 
-    public TrickAdapterAdmin(Context context, ArrayList<Trick> list, ArrayList<String> trickId) {
+    public TrickAdapterAdmin(Context context, ArrayList<Trick> list, String type, ArrayList<String> trickId) {
         this.context = context;
         this.list = list;
         this.trickId = trickId;
+        this.type = type;
     }
 
     @NonNull

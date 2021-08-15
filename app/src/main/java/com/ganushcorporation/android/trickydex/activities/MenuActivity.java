@@ -74,6 +74,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         chipAir = findViewById(R.id.chipAir);
         chipAir.setChecked(true);
         chipTrickList = findViewById(R.id.chipTrickList);
+        chipTrickList.setVisibility(View.GONE);
         chipTrickList.setChecked(true);
         chipSelectionGroup = findViewById(R.id.chipSelectionGroup);
 
