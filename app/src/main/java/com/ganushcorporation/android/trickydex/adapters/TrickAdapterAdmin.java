@@ -39,7 +39,7 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
     public SeekBar seekBarDifficultyUpdate;
     public ProgressBar progressBarUpdate;
     public ImageView buttonCloseUpdate;
-    public Button buttonValidateTrickUpdate;
+    public Button buttonValidateTrickUpdate, buttonDelete;
     public DatabaseReference referenceUpdate;
     public Spinner categorySpinnerUpdate;
     public String categoryToPushUpdate, idTrickTest;
@@ -58,7 +58,7 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
     @Override
     public TrickViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.trick, parent,false);
-        reference = FirebaseDatabase.getInstance().getReference("Tricks");
+
         return new TrickViewHolder(v);
 
 
@@ -68,12 +68,15 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
     @Override
     public void onBindViewHolder(@NonNull TrickViewHolder holder, int position) {
         trick = list.get(position);
+        int pos = holder.getBindingAdapterPosition();
         holder.trickName.setText(trick.name);
 
         holder.trickInfo = trick.info;
         holder.trickDifficulty = trick.difficulty;
         holder.trickCategory = trick.category;
-        holder.idTrick = trickId.get(position);
+        holder.idTrick = trickId.get(pos);
+
+        reference = FirebaseDatabase.getInstance().getReference("Tricks");
 
 
         holder.cardTrick.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +162,17 @@ public class TrickAdapterAdmin extends RecyclerView.Adapter<TrickAdapterAdmin.Tr
                     Log.e( "onBindViewHolder: ", idTrickTest);
                     referenceUpdate.updateChildren(childUpdates);
                     dialogUpdate.dismiss();
+                }
+        );
+
+        buttonDelete = dialogUpdate.findViewById(R.id.buttonDeleteTrick);
+        buttonDelete.setOnClickListener(view -> {
+                    /////////////////////////////////////////
+                    //--------------REMOVE TRICK-----------//
+                    /////////////////////////////////////////
+
+            referenceUpdate.child(idTrickTest).removeValue();
+            dialogUpdate.dismiss();
                 }
         );
 

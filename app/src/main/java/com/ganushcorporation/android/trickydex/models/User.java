@@ -11,7 +11,7 @@ public class User {
     public String firstname, lastname, email;
     public Boolean admin;
     public Map<String, Object> listDone;
-    public int slide, grab, air, trickList;
+    public int Slide, Grab, Air, trickList;
 
 
     public User(){
@@ -26,23 +26,23 @@ public class User {
 
     }
 
-    public User(String firstname, String lastname, String email, Map<String, Object> listDone, int slide){
+    public User(String firstname, String lastname, String email, Map<String, Object> listDone, int Slide, int Grab, int Air){
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.admin = false;
         this.listDone = listDone;
-        this.slide = slide;
+        this.Slide = Slide;
+        this.Air = Air;
+        this.Grab = Grab;
 
     }
 
-//    public User(Map<String, Object> listDone){
-//        this.listDone = listDone;
-//    }
+    public User(Map<String, Object> listDone){
+        this.listDone = listDone;
+    }
 
-//    public User(int slide){
-//        this.slide = slide;
-//    }
+
 
 
 }

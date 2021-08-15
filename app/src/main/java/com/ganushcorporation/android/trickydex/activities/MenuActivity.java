@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,10 +31,11 @@ import com.google.firebase.database.ValueEventListener;
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView profileButton;
     private ProgressBar slideProgressBar, airProgressBar, grabProgressBar, listProgressBar;
-    private TextView adminTextView;
+    private TextView adminTextView, textNumberAchieveSlides, textNumberAchieveAirs, textNumberAchieveGrabs,
+            percentageSlideTextView, percentageAirTextView, percentageGrabTextView;
     // Firebase
     private FirebaseUser user;
-    private DatabaseReference reference;
+    private DatabaseReference reference, reference2;
     private String userID;
     //Chip
     private Chip selectView, chipSlide, chipGrab, chipAir, chipTrickList;
@@ -41,7 +43,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     //Card view
     private CardView cardViewSlide, cardViewGrab, cardViewAir, cardViewTrickList;
     //SharePreferences
-    private String rememberSlide, rememberGrab, rememberAir, rememberTrickList;
+    public String rememberSlide, rememberGrab, rememberAir, rememberTrickList,
+                    userTotalSlide, totalSlide, userTotalAir, totalAir, userTotalGrab, totalGrab;
     private SharedPreferences.Editor editor;
 
     @Override
@@ -76,24 +79,20 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         // Progress bars
         slideProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        slideProgressBar.setMax(150);
-        slideProgressBar.setProgress(30);
-
         airProgressBar = (ProgressBar) findViewById(R.id.progressBarAirs);
-        airProgressBar.setMax(20);
-        airProgressBar.setProgress(10);
-
         grabProgressBar = (ProgressBar) findViewById(R.id.progressBarGrabs);
-        grabProgressBar.setMax(30);
-        grabProgressBar.setProgress(25);
-
         listProgressBar = (ProgressBar) findViewById(R.id.progressBarList);
-        listProgressBar.setMax(8);
-        listProgressBar.setProgress(1);
+
 
         // TextView
         adminTextView = findViewById(R.id.textViewAdmin);
         adminTextView.setOnClickListener(this);
+        textNumberAchieveSlides = findViewById(R.id.textNumberAchieveSlides);
+        textNumberAchieveGrabs = findViewById(R.id.textNumberAchieveGrabs);
+        textNumberAchieveAirs = findViewById(R.id.textNumberAchieveAirs);
+        percentageSlideTextView = findViewById(R.id.textPercentageSlides);
+        percentageAirTextView = findViewById(R.id.textPercentageAirs);
+        percentageGrabTextView = findViewById(R.id.textPercentageGrabs);
 
 
         //Remember credentials
@@ -171,21 +170,90 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference2 = FirebaseDatabase.getInstance().getReference("Tricks");
+
+
+        reference2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
+                totalSlide = snapshot.child("Slide").getValue().toString();
+                totalAir = snapshot.child("Air").getValue().toString();
+                totalGrab = snapshot.child("Grab").getValue().toString();
 
-                if(userProfile != null) {
-                    String firstName = userProfile.firstname;
-                    String lastName = userProfile.lastname;
-                    String email = userProfile.email;
-                    Boolean admin = userProfile.admin;
 
-                    if(admin) {
-                        adminTextView.setVisibility(View.VISIBLE);
+                reference.child(userID).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User userProfile = snapshot.getValue(User.class);
+
+                        if(userProfile != null) {
+                            Boolean admin = userProfile.admin;
+
+
+                            userTotalSlide = String.valueOf(userProfile.Slide);
+                            userTotalAir = String.valueOf(userProfile.Air);
+                            userTotalGrab = String.valueOf(userProfile.Grab);
+                            textNumberAchieveSlides.setText(userTotalSlide + "/" + totalSlide);
+                            textNumberAchieveAirs.setText(userTotalAir + "/" + totalAir);
+                            textNumberAchieveGrabs.setText(userTotalGrab + "/" + totalGrab);
+
+                            double doubleTotalSlide = convertToDouble(totalSlide);
+                            double doubleTotalGrab = convertToDouble(totalGrab);
+                            double doubleTotalAir =  convertToDouble(totalAir);
+                            double totalUserSlide = convertToDouble(userTotalSlide);
+                            double totalUserAir = convertToDouble(userTotalAir);
+                            double totalUserGrab = convertToDouble(userTotalGrab);
+
+                            String percentageSlide = String.valueOf((int) ((totalUserSlide/doubleTotalSlide) * 100));
+                            String percentageAir = String.valueOf((int) ((totalUserAir/doubleTotalAir) * 100));
+                            String percentageGrab= String.valueOf((int) ((totalUserGrab/doubleTotalGrab) * 100));
+
+
+                            percentageSlideTextView.setText(percentageSlide + "%");
+                            percentageAirTextView.setText(percentageAir + "%");
+                            percentageGrabTextView.setText(percentageGrab + "%");
+
+                            slideProgressBar.setMax((int)doubleTotalSlide);
+                            slideProgressBar.setProgress((int)totalUserSlide);
+
+                            airProgressBar.setMax((int)doubleTotalAir);
+                            airProgressBar.setProgress((int)totalUserAir);
+
+                            listProgressBar.setMax(8);
+                            listProgressBar.setProgress(1);
+
+                            grabProgressBar.setMax((int)doubleTotalGrab);
+                            grabProgressBar.setProgress((int)totalUserGrab);
+
+
+
+
+
+
+
+
+                            if(admin) {
+                                adminTextView.setVisibility(View.VISIBLE);
+                            }
+                        }
                     }
-                }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(MenuActivity.this, "Something wrong happened", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
             }
 
             @Override
@@ -194,6 +262,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+
+
+
+
 
 
 
@@ -235,6 +307,14 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             p.setMargins(l, t, r, b);
             v.requestLayout();
         }
+    }
+
+    public static Double convertToDouble(String str) {
+        double n=0;
+        if(str != null && str.length()>0) {
+            n = Double.parseDouble(str);
+        }
+        return n;
     }
 
     private void openChip() {

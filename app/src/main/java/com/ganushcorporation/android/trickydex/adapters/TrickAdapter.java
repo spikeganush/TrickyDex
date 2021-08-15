@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -22,10 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ganushcorporation.android.trickydex.R;
 import com.ganushcorporation.android.trickydex.models.Trick;
-import com.ganushcorporation.android.trickydex.models.TrickDone;
 import com.ganushcorporation.android.trickydex.models.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,12 +46,11 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
     private TextView info, infoTrickName;
     public ImageView buttonCloseInfo;
     public User userProfile, userListTrickChecked;
-    private int Count;
     // Firebase
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
-
+    private Map<String, Object> childUpdates;
 
 
     public TrickAdapter(Context context, ArrayList<Trick> list, String typePass, ArrayList<String> trickId) {
@@ -65,10 +60,13 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
         this.trickId = trickId;
     }
 
+
     @NonNull
     @Override
     public TrickListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.trick_list, parent,false);
+
+
         return new TrickListViewHolder(v);
 
 
@@ -97,23 +95,29 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
         //if true, your checkbox will be selected, else unselected
         holder.trickDone.setChecked(trick.isSelected());
 
+        holder.trickDone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //set your object's last status
+                holder.trickDone.setSelected(isChecked);
+                childUpdates = new HashMap<>();
+                childUpdates.put(userID+ "/"+type+"/", 0);
+
+                reference = FirebaseDatabase.getInstance().getReference("Users");
+
+                reference.updateChildren(childUpdates);
+            }
+        });
 
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userListTrickChecked = snapshot.getValue(User.class);
 
-                Log.e("onDataChange: ", String.valueOf(userListTrickChecked.listDone.keySet()));
 
-                if (userProfile != null) {
-                    for(int i = 0; i < userListTrickChecked.listDone.size(); i++) {
-                        if(userListTrickChecked.listDone.keySet() == holder.trickDone) {
-                            holder.trickDone.setChecked(trick.isSelected());
 
-                        }
-
-                    }
-                    if(userListTrickChecked.listDone.keySet() == holder.trickDone) {
+                if (userListTrickChecked != null) {
+                    if(userListTrickChecked.listDone.containsValue(holder.idTrick)) {
                         holder.trickDone.setChecked(true);
                     }
                 }
@@ -126,25 +130,17 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
         });
 
 
-
-
-
-
         holder.trickDone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 list.get(holder.getBindingAdapterPosition()).setSelected(isChecked);
-                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates = new HashMap<>();
 
-                reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                reference.child(userID).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         userProfile = snapshot.getValue(User.class);
-
-                        if (userProfile != null) {
-                            Count = userProfile.slide;
-                            Log.e( "onDataChange: ", String.valueOf(Count));
-                        }
                     }
 
                     @Override
@@ -153,15 +149,20 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
                     }
                 });
 
-
-
-
                 if(holder.trickDone.isChecked()) {
-                    childUpdates.put(userID+ "/slide/", ServerValue.increment(1));
-                    childUpdates.put(userID+ "/listDone/" + holder.idTrick, holder.idTrick);
+                    try {
+                        childUpdates.put(userID+ "/listDone/" + holder.idTrick, holder.idTrick);
+                        childUpdates.put(userID+ "/"+type+"/", ServerValue.increment(1));
+
+                    } catch(Exception e) {
+
+                    }
+
+
+
 
                 } else {
-                    childUpdates.put(userID+ "/slide/", ServerValue.increment(-1));
+                    childUpdates.put(userID+ "/"+type+"/", ServerValue.increment(-1));
                     reference.child(userID+ "/listDone/" + holder.idTrick).removeValue();
 
                 }
@@ -195,6 +196,8 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
             holder.cardTrickRight.setBackgroundResource(R.drawable.right_card_air);
         }
 
+
+
     }
 
 
@@ -217,7 +220,9 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
 
     @Override
     public int getItemCount() {
+
         return list.size();
+
     }
 
     public static class TrickListViewHolder extends RecyclerView.ViewHolder {

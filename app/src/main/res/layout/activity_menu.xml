@@ -330,7 +330,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textSlides" />
 
                     <TextView
-                        android:id="@+id/textNumberAchieve"
+                        android:id="@+id/textNumberAchieveSlides"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -342,7 +342,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textProgression" />
 
                     <TextView
-                        android:id="@+id/textPercentage"
+                        android:id="@+id/textPercentageSlides"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
@@ -350,9 +350,9 @@
                         android:text="@string/_20"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textNumberAchieve"
-                        app:layout_constraintStart_toEndOf="@+id/textNumberAchieve"
-                        app:layout_constraintTop_toTopOf="@+id/textNumberAchieve"
+                        app:layout_constraintBottom_toBottomOf="@+id/textNumberAchieveSlides"
+                        app:layout_constraintStart_toEndOf="@+id/textNumberAchieveSlides"
+                        app:layout_constraintTop_toTopOf="@+id/textNumberAchieveSlides"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <ProgressBar
@@ -366,7 +366,7 @@
                         android:progressDrawable="@drawable/progress_bg"
                         app:layout_constraintEnd_toStartOf="@+id/guideline4"
                         app:layout_constraintStart_toStartOf="@+id/guideline3"
-                        app:layout_constraintTop_toBottomOf="@+id/textNumberAchieve" />
+                        app:layout_constraintTop_toBottomOf="@+id/textNumberAchieveSlides" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 

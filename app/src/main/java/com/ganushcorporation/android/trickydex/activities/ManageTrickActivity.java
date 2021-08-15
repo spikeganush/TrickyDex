@@ -37,16 +37,8 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
     private ProgressBar progressBar;
     private String categoryToPush;
     private ImageView buttonClose;
-    public ArrayList<String> listTrickId;
 
-    private EditText  editTextNameUpdate, editTextInfoUpdate;
-    private SeekBar seekBarDifficultyUpdate;
-    private ProgressBar progressBarUpdate;
-    private ImageView buttonCloseUpdate;
-    private Button buttonValidateTrickUpdate;
-    private DatabaseReference referenceUpdate;
-    private Spinner categorySpinnerUpdate;
-    private String categoryToPushUpdate;
+
     // Firebase
     private DatabaseReference reference;
 
@@ -56,6 +48,8 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
     public DatabaseReference databaseReference;
     public TrickAdapterAdmin trickAdapterAdmin;
     public ArrayList<Trick> list;
+    public ArrayList<String> listTrickId;
+    public Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +74,8 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
         trickAdapterAdmin = new TrickAdapterAdmin(this, list, listTrickId);
         recyclerView.setAdapter(trickAdapterAdmin);
 
-        databaseReference.orderByChild("category").addValueEventListener(new ValueEventListener() {
+
+        databaseReference.orderByChild("admin").equalTo("yes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
@@ -97,8 +92,6 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
 
             }
         });
-
-
     }
 
     @Override
@@ -115,7 +108,7 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void showPopUp() {
-        Dialog dialog = new Dialog(this, R.style.dialogPopUp);
+        dialog = new Dialog(this, R.style.dialogPopUp);
         dialog.setContentView(R.layout.add_trick);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_dialog);
         dialog.show();
@@ -180,6 +173,7 @@ public class  ManageTrickActivity extends AppCompatActivity implements View.OnCl
         reference.push().setValue(trick).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
                 progressBar.setVisibility(View.GONE);
+                dialog.dismiss();
                 Toast.makeText(ManageTrickActivity.this,name+" has been registered successfully!", Toast.LENGTH_LONG).show();
             } else {
                 progressBar.setVisibility(View.GONE);

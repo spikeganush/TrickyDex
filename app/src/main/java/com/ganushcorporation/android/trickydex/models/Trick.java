@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Trick {
 
-    public String name, info, category, id;
+    public String name, info, category, id, admin;
     public int difficulty;
     public boolean isSelected;
 
@@ -17,6 +17,7 @@ public class Trick {
         this.category = category;
         this.info = info;
         this.difficulty = difficulty;
+        this.admin = "yes";
 
     }
     public Trick(String id, String name, String category, String info, int difficulty){
