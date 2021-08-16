@@ -130,9 +130,11 @@ public class TrickAdapter extends RecyclerView.Adapter<TrickAdapter.TrickListVie
 
 
 
-                if (userListTrickChecked != null) {
-                    if(userListTrickChecked.listDone.containsValue(holder.idTrick)) {
-                        holder.trickDone.setChecked(true);
+                    if (userListTrickChecked != null) {
+                        if (userListTrickChecked.listDone != null) {
+                        if (userListTrickChecked.listDone.containsValue(holder.idTrick)) {
+                            holder.trickDone.setChecked(true);
+                        }
                     }
                 }
             }

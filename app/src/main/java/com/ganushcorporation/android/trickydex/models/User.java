@@ -23,7 +23,6 @@ public class User {
         this.lastname = lastname;
         this.email = email;
         this.admin = false;
-
     }
 
     public User(String firstname, String lastname, String email, Map<String, Object> listDone, int Slide, int Grab, int Air){
